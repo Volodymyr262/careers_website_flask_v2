@@ -11,17 +11,28 @@
         height: 360px;
         width: 100%;
         object-fit: cover;
+        margin-bottom: 16px;
                 }
 
     </style>
 </head>
     <body>
+    {% include 'nav.html' %}
+     <img class="img-fluid" id="banner" src="http://192.168.0.40:5000/static/images/banner.jpg">
     <div class="container">
-    <h1 class="text-center mt-2 mb-4">Jovian Careers</h1>
-    <img class="img-fluid" id="banner" src="http://192.168.0.40:5000/static/images/banner.jpg">
+    <h1 class="text-center mt-2 mb-4">{{company_name}} Careers</h1>
     <h2 class="text-center mt-2 mb-4">About Jovian</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in sagittis nisi. Donec et quam sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed a felis a arcu condimentum rutrum. Donec at iaculis sem. Fusce quis nibh quis eros sagittis porta sed quis purus. Aliquam ac rhoncus risus. Duis nunc nibh, mattis in diam a, ornare porta orci. Nulla iaculis venenatis purus porta ullamcorper. Donec ornare, urna at posuere faucibus, neque nisl tempus turpis, nec efficitur neque dolor vitae nibh. Duis pellentesque nunc sed sapien elementum finibus. Mauris sodales pellentesque blandit.
-Donec a massa placerat, lacinia ligula vitae, elementum sapien. Nam et laoreet sapien, sed finibus erat. Sed tempor volutpat elit eget pulvinar. In elit ante, cursus at pharetra vel, pretium efficitur arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget tincidunt diam, id suscipit mauris. Nulla non nulla vitae velit tempor scelerisque. Mauris fringilla lobortis urna fermentum tincidunt. Cras facilisis enim dui, non sollicitudin diam dapibus eu. Cras non lorem eu ante consectetur commodo in vel ex. Vestibulum condimentum consequat lacus sed viverra. Integer malesuada semper eros elementum maximus.</p>
+    <div class="row" style="margin-bottom:16px;">
+        <div class="col-md-6">
+    <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in sagittis nisi. Donec et quam sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed a felis a arcu condimentum rutrum. Donec at iaculis sem. Fusce quis nibh quis eros sagittis porta sed quis purus. Aliquam ac rhoncus risus. Duis nunc nibh, mattis in diam a, ornare porta orci. Nulla iaculis venenatis purus porta ullamcorper. Donec ornare, urna at posuere faucibus, neque nisl tempus turpis, nec efficitur neque dolor vitae nibh. Duis pellentesque nunc sed sapien elementum finibus. Mauris sodales pellentesque blandit.
+Donec a massa placerat, lacinia ligula vitae, elementum sapien. Nam et laoreet sapien, sed finibus erat. Sed tempor volutpat elit eget pulvinar. In elit ante, cursus at pharetra vel, pretium efficitur arcu. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget tincidunt diam, id suscipit mauris. Nulla non nulla vitae velit tempor scelerisque. Mauris fringilla lobortis urna fermentum tincidunt. Cras facilisis enim dui, non sollicitudin diam dapibus eu. Cras non lorem eu ante consectetur commodo in vel ex. Vestibulum condimentum consequat lacus sed viverra. Integer malesuada semper eros elementum maximus.
+    </p>
+            </div>
+        <div class="d-none d-md-block col-md-6">
+        <img src="static/images/people.jpg"
+             style="height:320px; border-radius:4px;">
+        </div>
+        </div>
     <h2 class="text-center mt-2 mb-4">Open Positions</h2>
     <p>
        {% for job in jobs %}
@@ -35,5 +46,6 @@ Donec a massa placerat, lacinia ligula vitae, elementum sapien. Nam et laoreet s
             <p>Copyright 2022, Jovian</p>
             </div>
         </div>
+    {% include 'footer.html' %}
     </body>
 </html>
