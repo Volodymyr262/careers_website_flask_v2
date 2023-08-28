@@ -2,39 +2,39 @@
 <form action="/job/{{job.id}}/apply" method="post">
 <div class="mb-2">
 <label>Full Name</label><br>
-<input type="text" name="full_name" placeholder="Bruce Wayne">
+<input class="form-control-sm" type="text" name="full_name" size="40" placeholder="Bruce Wayne">
 </div>
 
 
 <div class="mb-2">
 <label>Email</label><br>
-<input type="text" name="email" placeholder="Bruce@Wayne.com">
+<input class="form-control-sm" type="text" name="email" size="40" placeholder="Bruce@Wayne.com">
 </div>
 
 <div class="mb-2">
 <label>LinkedIn URL</label><br>
-<input type="text" name="linkedin_url" placeholder="https://linked.com/in/brucewayne">
+<input class="form-control-sm" type="text" name="linkedin_url" size="40" placeholder="https://linked.com/in/brucewayne">
 </div>
 
 
 <div class="mb-2">
 <label>Education</label><br>
-<textarea name="education"></textarea>
+<textarea class="form-control-sm" cols="43" name="education"></textarea>
 </div>
 
 
 <div class="mb-2">
 <label>Work Experience</label><br>
-<textarea name="work_experience"></textarea>
+<textarea class="form-control-sm" cols="43" name="work_experience"></textarea>
 </div>
 
 
 <div class="mb-2">
 <label>Resume URL</label><br>
-<input type="text" name="resume_url">
+<input class="form-control-sm" type="text" size="40" name="resume_url">
 </div>
 
 
-<input type="submit" name="submit">
+<button type="submit" class="btn btn-primary mb-3">Submit</button>
 </form>
 

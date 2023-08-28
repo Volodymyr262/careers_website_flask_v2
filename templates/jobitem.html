@@ -14,7 +14,12 @@
         {% endif %}
   </div>
   <div class="col-2">
+      {% if session['loggedin'] == true %}
         <a href="/job/{{job.id}}" type="button"
            class="btn btn-outline-primary">Apply</a>
+      {% else %}
+      <a href="/login" type="button"
+           class="btn btn-outline-primary">Apply</a>
+      {% endif %}
   </div>
 </div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+{% include "nav.html" %}
+{% include "bootstrap.html" %}
+{% include "flash_check.html" %}
+<h1>Login</h1>
+<form class="center"  method="post">
+<div class="form group">
+    <label class="mb-2">Email address</label> <br>
+    <input type="text"
+           class="form-control-sm"
+           size="40"
+           id="email"
+           name="email"
+           placeholder="email@gmail.com"><br>
+    </div>
+
+    <div class="form group">
+     <label class="mb-2">Password</label><br>
+    <input type="password"
+           class="form-control-sm"
+           size="40"
+           id="password"
+           name="password"> <br>
+    </div>
+    <a href="/signup">Sign up</a><br>
+    <button type="submit" class="btn btn-primary mb-3 mt-2">Submit</button>
+</form>
+
+</body>
+</html>
