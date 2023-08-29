@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include "bootstrap.html" %}
+{% include "nav.html" %}
+{% include "banner.html" %}
+<h1 class="text-center mt-2 mb-4">Jobs you applied</h1>
+{% for job in data %}
+{% include 'job_item_user_page.html' %}
+{% endfor %}
+</body>
+</html>

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, redirect, flash, url_for, session
 from database import load_jobs_from_db, load_job_from_db, \
-    add_application_to_db, add_user, login_check
+    add_application_to_db, add_user, login_check, get_user_id, show_user_applications
 
 
 app = Flask(__name__)
@@ -12,15 +12,24 @@ def login():
         data = request.form
         if login_check(data):
             session['loggedin'] = True
+            session['email'] = data['email']
             return redirect(url_for('heloo'))
         else:
             flash("Incorrect data", category='error')
     return render_template("login.html")
 
 
+@app.route("/profile")
+def profile():
+    id = get_user_id(session['email'])[0]['id']
+    user_applications = show_user_applications(id)
+    return render_template("profile.html", data=user_applications)
+
+
 @app.route("/logout")
 def logout():
     session['loggedin'] = False
+    session['email'] = None
     return redirect(url_for('login'))
 
 
@@ -67,7 +76,8 @@ def show_job(id):
 def apply_to_job(id):
     data = request.form
     job =load_job_from_db(id)
-    add_application_to_db(job_id=id, data=data)
+    user_id = get_user_id(session['email'])
+    add_application_to_db(job_id=id, data=data, user_id=user_id[0]['id'])
     return render_template("applicatin_submitted.html",
                            application=data, job=job)
 

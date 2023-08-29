@@ -13,10 +13,6 @@ engine = create_engine(db_connection_string, connect_args={
         }
     })
 
-#login_manager = LoginManager()
-#login_manager.login_view = 'main.login'
-#login_manager.init_app(app)
-
 
 def load_jobs_from_db():
     with engine.connect() as conn:
@@ -38,19 +34,21 @@ def load_job_from_db(id):
         else:
             return dict(rows[0])
 
-def add_application_to_db(job_id, data):
+
+def add_application_to_db(job_id, data, user_id):
     with engine.connect() as conn:
         query = text("INSERT INTO applications(job_id, full_name,"
                      "email, linkedin_url, education, work_experience, "
-                     "resume_url) VALUES (:job_id, :full_name, "
+                     "resume_url, user_id) VALUES (:job_id, :full_name, "
                      ":email, :linkedin_url, :education, :work_experience, "
-                     ":resume_url)")
+                     ":resume_url, :user_id)")
         conn.execute(query,
                      job_id=job_id, full_name=data['full_name'],
                      email=data['email'], linkedin_url=data['linkedin_url'],
                      education=data['education'],
                      work_experience=data['work_experience'],
-                     resume_url=data['resume_url'])
+                     resume_url=data['resume_url'],
+                     user_id = user_id)
 
 
 def add_user(data):
@@ -86,6 +84,26 @@ def login_check(data):
             else:
                 flash('incorrect data', category='error')
                 return False
-        
+
+
+def get_user_id(email):
+    with engine.connect() as conn:
+        query = text("SELECT id FROM career.user WHERE email = :email")
+        results_as_dicts = [{'id': row['id']} for row in conn.execute(query, email=email)]
+        return results_as_dicts
+
+
+def show_user_applications(user_id):
+    with engine.connect() as conn:
+        query = text("SELECT j.*FROM jobs j JOIN applications a ON j.id = a.job_id WHERE a.user_id = :user_id ")
+        results_as_dicts = [{'id': row['id'],
+                             'title': row['title'],
+                             'salary': row['salary'],
+                             'currency': row['currency'],
+                             'responsibilities': row['responsibilities'],
+                             'requirements': row['requirements']} for row in conn.execute(query, user_id=str(user_id))]
+        return results_as_dicts
+
+
 
 
