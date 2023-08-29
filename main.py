@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, redirect, flash, url_for, session
 from database import load_jobs_from_db, load_job_from_db, \
-    add_application_to_db, add_user, login_check, get_user_id, show_user_applications
+    add_application_to_db, add_user, login_check, get_user_id, show_user_applications, add_job, get_posted_jobs, get_apllications_for_job
 
 
 app = Flask(__name__)
@@ -26,6 +26,18 @@ def profile():
     return render_template("profile.html", data=user_applications)
 
 
+@app.route("/profile_posted_jobs")
+def posted_jobs():
+    data = get_posted_jobs(employer_id=get_user_id(session['email'])[0]['id'])
+    return render_template("profile_job_posted.html", data=data)
+
+
+@app.route("/job_applications/<id>")
+def job_applications(id):
+    applications = get_apllications_for_job(id)
+    return render_template("job_applications.html", applications=applications)
+
+
 @app.route("/logout")
 def logout():
     session['loggedin'] = False
@@ -49,6 +61,18 @@ def signup():
             add_user(data)
             return redirect(url_for('heloo'))
     return render_template("signup.html")
+
+
+@app.route("/post_job")
+def post_job():
+    return render_template("post_job.html")
+
+
+@app.route("/post_job/submitted", methods=['POST'])
+def post_job_submitted():
+    data = request.form
+    add_job(data=data, employer_id=get_user_id(session['email'])[0]['id'])
+    return render_template("post_job_submitted.html")
 
 
 @app.route("/")

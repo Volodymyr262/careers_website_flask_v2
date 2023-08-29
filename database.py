@@ -22,6 +22,7 @@ def load_jobs_from_db():
             jobs.append(dict(row))
     return jobs
 
+
 def load_job_from_db(id):
     with engine.connect() as conn:
         result = conn.execute(
@@ -48,7 +49,7 @@ def add_application_to_db(job_id, data, user_id):
                      education=data['education'],
                      work_experience=data['work_experience'],
                      resume_url=data['resume_url'],
-                     user_id = user_id)
+                     user_id=user_id)
 
 
 def add_user(data):
@@ -103,6 +104,45 @@ def show_user_applications(user_id):
                              'responsibilities': row['responsibilities'],
                              'requirements': row['requirements']} for row in conn.execute(query, user_id=str(user_id))]
         return results_as_dicts
+
+
+def add_job(data, employer_id):
+    with engine.connect() as conn:
+        unique_seq = uniqueid()
+        job_id = next(unique_seq)
+        query = text("INSERT INTO jobs (id, title, location, salary, currency, responsibilities, requirements, employer_id)"
+                     "VALUES(:id, :title, :location, :salary, :currency, :responsibilities, :requirements, :employer_id)")
+        conn.execute(query,
+                     id=job_id,
+                     title=data['title'],
+                     location=data['location'],
+                     salary=data['salary'],
+                     currency='$',
+                     responsibilities=data['responsibilities'],
+                     requirements=data['requirements'],
+                     employer_id=employer_id)
+
+
+def get_posted_jobs(employer_id):
+    with engine.connect() as conn:
+        query = text("SELECT id, title, location, salary, currency FROM jobs WHERE employer_id = :employer_id")
+        results_as_dicts = [{'id': row['id'],
+                             'location': row['location'],
+                             'title': row['title'],
+                             'salary': row['salary'],
+                             'currency': row['currency']} for row in conn.execute(query, employer_id=str(employer_id))]
+        return results_as_dicts
+
+
+def get_apllications_for_job(id):
+    with engine.connect() as conn:
+        query = text("SELECT * FROM applications WHERE job_id = :job_id")
+        result = conn.execute(query, job_id=id)
+        applications = []
+        for row in result.all():
+            applications.append(dict(row))
+    return applications
+
 
 
 

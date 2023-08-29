@@ -22,7 +22,10 @@ Donec a massa placerat, lacinia ligula vitae, elementum sapien. Nam et laoreet s
              style="height:320px; border-radius:4px;">
         </div>
         </div>
-    <h2 class="text-center mt-2 mb-4">Open Positions</h2>
+    <h2 class="text-center mt-2 mb-10">Open Positions</h2>
+        <div class="text-center mt-4 mb-4">
+        <a href="/post_job" type="button"
+           class="btn btn-secondary btn-lg">Post job offer</a> </div>
     <p>
        {% for job in jobs %}
             {% include 'jobitem.html' %}

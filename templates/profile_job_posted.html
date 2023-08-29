@@ -8,17 +8,17 @@
 {% include "bootstrap.html" %}
 {% include "nav.html" %}
 {% include "banner.html" %}
-<h1 class="text-center mt-2 mb-4">Jobs you applied</h1>
+<h1 class="text-center mt-2 mb-4">Jobs you posted</h1>
 <div class="text-center mt-4 mb-4">
-<a href="/profile_posted_jobs" type="button"
-           class="btn btn-secondary btn-lg">See posted jobs</a>
-    </div>
+<a href="/profile" type="button"
+           class="btn btn-secondary btn-lg">See applied jobs</a>
+    </div>>
 {% if data %}
 {% for job in data %}
-{% include 'job_item_user_page.html' %}
+{% include 'posted_jobs.html' %}
 {% endfor %}
 {% else %}
-<h1>Here will be displayed jobs you applied</h1>
+<h1>Here will be displayed jobs that you post</h1>
 {% endif %}
 {% include 'footer.html' %}
 </body>

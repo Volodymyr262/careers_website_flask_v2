@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Sybmitted</title>
+    {% include 'bootstrap.html' %}
+    {% include 'nav.html' %}
+    {% include 'banner.html' %}
+</head>
+<body>
+    <div class="container">
+    <h1 class="text-center mt-2 mb-4">
+        Jovian Careers
+    </h1>
+      {% for application in applications %}
+      <div class="border-bottom" style="margin-bottom:16px;
+  padding-bottom:8px;">
+    <b>Full name</b>
+    <div class="mb-2">{{application.full_name}}</div>
+
+    <b>Email</b>
+    <div class="mb-2">{{application.email}}</div>
+
+    <b>Likedin URL</b>
+    <div class="mb-2">{{application.linkedin_url}}</div>
+
+    <b>Education</b>
+    <div class="mb-2">{{application.education}}</div>
+
+    <b>Work experience</b>
+    <div class="mb-2">{{application.work_experience}}</div>
+
+    <b>Resume URL</b>
+    <div class="mb-2">{{application.resume_url}}</div>
+        </div>
+      {% endfor %}
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>
